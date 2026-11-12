@@ -268,6 +268,7 @@
     void line.getBoundingClientRect();
     list.classList.add("is-drawn");
     setTimeout(draw, 1200); // re-measure once the cards' scroll-reveal has settled
+    setTimeout(draw, 2600); // and again for slower devices
     line.style.strokeDashoffset = 0;
     steps.forEach(function (li, i) {
       setTimeout(function () { li.classList.add("is-shown"); }, 250 + i * 450);
