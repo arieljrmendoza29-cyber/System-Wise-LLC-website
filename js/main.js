@@ -1,3 +1,17 @@
+// Home page always opens at the very top (hero first), with the mobile menu closed.
+(function () {
+  if (!document.body.classList.contains("page-home")) return;
+  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+  function top() {
+    var l = document.querySelector(".nav-links");
+    if (l) l.classList.remove("open");
+    if (!location.hash) window.scrollTo(0, 0);
+  }
+  top();
+  window.addEventListener("pageshow", top);
+  window.addEventListener("load", top);
+})();
+
 // Systems Wise, LLC — shared behavior
 
 // Scroll-reveal animations: tag sections and cards, then fade them in as they enter the viewport
