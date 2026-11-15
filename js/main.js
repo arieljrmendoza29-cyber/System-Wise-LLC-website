@@ -459,7 +459,7 @@
     var d = window.scrollY - lastScroll;
     lastScroll = window.scrollY;
     if (!visible || dragging || Math.abs(d) > 400) return;
-    vel -= d * 9 * S.scroll;
+   vel -= d * 2 * S.scroll;
     vel = Math.max(-2200, Math.min(2200, vel));
     kick();
   }, { passive: true });
