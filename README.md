@@ -1,6 +1,6 @@
-# System Wise LLC Website
+# Systems Wise, LLC Website
 
-Marketing website for **System Wise LLC** (systemwisellc.com): managed IT, network infrastructure, cloud, cybersecurity, automation, VoIP, web and IT consulting services.
+Marketing website for **Systems Wise, LLC** (systemwisellc.com): managed IT, network infrastructure, cloud, cybersecurity, automation, VoIP, web and IT consulting services.
 
 It's a plain static site (HTML, CSS and a little vanilla JavaScript). There's no build step and nothing to install.
 
@@ -32,10 +32,10 @@ npx serve .
 
 ## Before going live
 
-1. **Phone number:** replace the placeholder `(000) 000-0000` / `tel:+10000000000` on every page.
-2. **Email:** confirm `info@systemwisellc.com` is correct.
+1. **Contact details:** phone (773) 709-4298, address 313 N. Plankinton Ave, Milwaukee, WI 53203, and contact person Corey Wheeler (Manager) are set. Legal name: **Systems Wise, LLC**.
+2. **Email:** `info@systemwisellc.com` is NOT confirmed yet. Verify the mailbox exists (and that the domain spelling is right) before launch, then search-and-replace it if it changes.
 3. **Form submissions:** the contact and intake forms validate input but don't send it anywhere yet. Connect them to a form service such as [Formspree](https://formspree.io) or Netlify Forms. Look for the `TODO` comments in `js/main.js`.
-4. **Testimonials:** the 10 testimonials on `index.html` and `testimonials.html` are **samples for design preview**. Replace them with real client reviews (with permission) and delete the yellow `sample-note` lines. Publishing invented reviews as real ones can violate FTC rules.
+4. **Testimonials:** the client reviews are real and shown with permission. Keep written permission on file for each client's name, photo and quote.
 5. **Hero background video (optional):** in `index.html`, put your video link in the `data-src` attribute of `<video class="hero-bg__video">`. Both HLS streams (`.m3u8`) and `.mp4` files work; HLS loads `hls.js` automatically where needed. Until a link is added, an animated background is shown instead.
 6. **Domain:** update `sitemap.xml` and `robots.txt` if the site won't live at `https://systemwisellc.com`.
 

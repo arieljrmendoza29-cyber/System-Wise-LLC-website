@@ -1,6 +1,6 @@
-/* System Wise LLC — shared styles */
+/* Systems Wise, LLC — shared styles */
 :root {
-  /* Brand colors sampled from the System Wise logo */
+  /* Brand colors sampled from the Systems Wise logo */
   --navy: #13254a;
   --navy-2: #2e3b50;
   --blue: #2546e8;
@@ -232,7 +232,7 @@ p { margin: 0 0 1em; }
 
 /* Footer */
 .site-footer { background: var(--navy); color: #9fb3d1; padding: 64px 0 28px; font-size: .94rem; }
-.footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 40px; }
+.footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.3fr; gap: 40px; }
 .site-footer .logo { color: #fff; margin-bottom: 14px; --logo-gap: var(--navy); }
 .site-footer h4 { color: #fff; margin: 0 0 14px; font-size: .95rem; }
 .site-footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
@@ -1113,3 +1113,16 @@ main { overflow-x: hidden; overflow-x: clip; } /* keeps slide-in effects from ca
   .about-panel-side { width: 84px; height: 84px; }
   .about-panel-side strong { font-size: 1.3rem; }
 }
+
+/* ---------- Logo image + map ---------- */
+.site-footer .logo-mark { filter: brightness(1.35) saturate(1.1); }
+.page-home .site-header:not(.scrolled) .logo-mark { filter: brightness(1.35) saturate(1.1); }
+.map-card { background: #fff; border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow); overflow: hidden; }
+.map-card iframe { display: block; width: 100%; height: clamp(300px, 42vw, 440px); border: 0; }
+.map-card__bar { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; padding: 20px 24px; }
+.map-card__bar strong { display: block; color: var(--navy); }
+.map-card__bar span { color: var(--muted); }
+.map-card__actions { display: flex; flex-wrap: wrap; gap: 12px; }
+@media (max-width: 640px) { .map-card__actions { width: 100%; } .map-card__actions .btn { flex: 1 1 100%; text-align: center; justify-content: center; } }
+.map-card__actions .btn-outline { color: var(--navy); background: #fff; border: 2px solid var(--navy); }
+.map-card__actions .btn-outline:hover { background: var(--navy); color: #fff; }

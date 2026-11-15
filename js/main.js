@@ -1,4 +1,4 @@
-// System Wise LLC — shared behavior
+// Systems Wise, LLC — shared behavior
 
 // Scroll-reveal animations: tag sections and cards, then fade them in as they enter the viewport
 (function () {
