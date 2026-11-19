@@ -223,7 +223,14 @@ p { margin: 0 0 1em; }
   background: #e8f7ee; color: #1d6b3c; font-weight: 500;
 }
 .form-success.show { display: block; }
-.info-card { background: var(--navy); color: #d6e2f5; border-radius: 20px; padding: 36px; }
+.form-error {
+  display: none; padding: 16px 18px; border-radius: 10px; margin-top: 16px;
+  background: #fdecec; color: #8a1f1f; font-weight: 500; line-height: 1.55;
+}
+.form-error.show { display: block; }
+.form-error a { color: inherit; font-weight: 700; text-decoration: underline; }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; } /* spam trap, hidden from people */
+.btn[disabled] { opacity: .65; cursor: wait; }.info-card { background: var(--navy); color: #d6e2f5; border-radius: 20px; padding: 36px; }
 .info-card h3 { color: #fff; }
 .info-item { display: flex; gap: 14px; margin-top: 24px; }
 .info-item .icon { margin: 0; flex: 0 0 44px; height: 44px; background: rgba(255,255,255,.08); color: var(--cyan); }

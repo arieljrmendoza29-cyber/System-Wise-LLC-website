@@ -14,6 +14,25 @@
 
 // Systems Wise, LLC — shared behavior
 
+// Where the contact and intake forms send their submissions: the "Web app" URL of the
+// client's Google Apps Script (saves each lead to their Google Sheet and emails them).
+// If this is ever emptied, the forms ask visitors to call or email instead.
+var LEADS_ENDPOINT = "https://script.google.com/macros/s/AKfycbxLwdGswFsuWCjeOrZJ2X8fpLfa3600eRkSEmi-l9kOpzr57nkvnwWLebGPpNajlcOOxg/exec";
+
+function sendLead(params) {
+  if (!LEADS_ENDPOINT) return Promise.reject(new Error("Lead form is not connected"));
+  params.append("page", location.pathname.split("/").pop() || "index.html");
+  return fetch(LEADS_ENDPOINT, { method: "POST", body: params })
+    .then(function (r) { return r.json(); })
+    .then(function (j) { if (!j || !j.ok) throw new Error((j && j.error) || "Lead was not saved"); });
+}
+
+function setSending(button, sending, label) {
+  if (!button) return;
+  if (sending) { button.dataset.label = button.innerHTML; button.innerHTML = label || "Sending…"; button.disabled = true; }
+  else { button.innerHTML = button.dataset.label || button.innerHTML; button.disabled = false; }
+}
+
 // Scroll-reveal animations: tag sections and cards, then fade them in as they enter the viewport
 (function () {
   var groups = [
@@ -1121,14 +1140,23 @@
   });
   back.addEventListener("click", function () { show(current - 1); });
 
+  var errorBox = form.querySelector("[data-form-error]");
   form.addEventListener("submit", function (e) {
     e.preventDefault();
     if (!validStep(current)) return;
-    // TODO: connect to a form backend (e.g. Formspree, Netlify Forms, or your own endpoint)
-    form.querySelectorAll(".intake-step, .step-nav").forEach(function (el) { el.hidden = true; });
-    document.querySelector(".step-nav").style.display = "none";
-    markers.forEach(function (m) { m.classList.remove("active"); m.classList.add("done"); });
-    document.getElementById("intake-success").classList.add("show");
+    if (errorBox) errorBox.classList.remove("show");
+    var params = new URLSearchParams(new FormData(form)); // keeps every ticked checkbox
+    params.append("form", "intake");
+    setSending(submit, true);
+    sendLead(params).then(function () {
+      form.querySelectorAll(".intake-step, .step-nav").forEach(function (el) { el.hidden = true; });
+      document.querySelector(".step-nav").style.display = "none";
+      markers.forEach(function (m) { m.classList.remove("active"); m.classList.add("done"); });
+      document.getElementById("intake-success").classList.add("show");
+    }).catch(function () {
+      setSending(submit, false);
+      if (errorBox) errorBox.classList.add("show");
+    });
   });
 
   form.querySelectorAll(".field[data-required]").forEach(function (f) {
@@ -1169,10 +1197,22 @@
       if (first) first.focus();
       return;
     }
-    // TODO: connect to a form backend (e.g. Formspree, Netlify Forms, or your own endpoint)
-    form.reset();
-    if (requested) select.value = requested;
-    document.getElementById("form-success").classList.add("show");
+    var button = form.querySelector('button[type="submit"]');
+    var errorBox = form.querySelector("[data-form-error]");
+    var success = document.getElementById("form-success");
+    if (errorBox) errorBox.classList.remove("show");
+    success.classList.remove("show");
+    var params = new URLSearchParams(new FormData(form));
+    params.set("service", select.options[select.selectedIndex].text); // readable name, not the code
+    params.append("form", "contact");
+    setSending(button, true);
+    sendLead(params).then(function () {
+      form.reset();
+      if (requested) select.value = requested;
+      success.classList.add("show");
+    }).catch(function () {
+      if (errorBox) errorBox.classList.add("show");
+    }).then(function () { setSending(button, false); });
   });
 
   form.querySelectorAll(".field[data-required]").forEach(function (f) {
